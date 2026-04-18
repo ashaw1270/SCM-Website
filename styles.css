@@ -128,6 +128,52 @@ body {
   border-color: rgba(255, 255, 255, 0.16);
 }
 
+.site-footer {
+  max-width: var(--content-max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.25rem var(--page-pad-x) 2rem;
+  border-top: 1px solid rgba(44, 45, 54, 0.28);
+  text-align: center;
+}
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem 0.65rem;
+}
+
+.footer-sep {
+  color: var(--text-muted);
+  opacity: 0.55;
+  user-select: none;
+  font-weight: 600;
+}
+
+.footer-link {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 220ms ease;
+  word-break: break-word;
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: var(--brand);
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 .page-content {
   max-width: var(--content-max);
   width: 100%;
