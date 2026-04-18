@@ -6,7 +6,7 @@
     <title>Spice City Music | Home</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="home-page">
     <header class="site-header">
       <div class="site-header-inner">
         <a class="header-brand" href="index.html" aria-label="Spice City Music home">
@@ -25,26 +25,209 @@
     </header>
 
     <main class="page-content">
-      <section class="hero">
+      <section class="hero" id="heroSection">
+        <p class="eyebrow">Luxury DJ Entertainment</p>
         <h1>Spice City Music</h1>
         <p class="lead">Open for business for Summer 2026.</p>
-        <p>
+        <p class="hero-copy">
           We bring high-energy DJ entertainment for weddings, private parties,
           and events. Reach out now to reserve your date.
         </p>
-        <a class="cta-button" href="contact.html">Book Us</a>
+        <div class="hero-actions">
+          <a class="cta-button" href="contact.html">Book Us</a>
+          <a class="ghost-button" href="about.html">Our Story</a>
+        </div>
       </section>
 
-      <section class="video-section" aria-labelledby="promo-video-title">
+      <section class="video-section" id="promoSection" aria-labelledby="promo-video-title">
         <h2 id="promo-video-title">Watch Our Promo</h2>
         <p>Get a quick feel for the Spice City Music experience.</p>
         <div class="video-frame">
-          <video controls preload="metadata" poster="logo.png">
+          <video id="promoVideo" controls preload="metadata" poster="logo.png" muted playsinline>
+            <source src="promo.mp4" type="video/mp4" />
             <source src="promo.mov" type="video/quicktime" />
             Your browser does not support the video tag.
           </video>
         </div>
       </section>
     </main>
+    <script>
+      (function () {
+        const body = document.body;
+        const promoSection = document.getElementById("promoSection");
+        const promoVideo = document.getElementById("promoVideo");
+        const videoFrame = document.querySelector(".video-frame");
+
+        if (!promoSection || !promoVideo || !videoFrame) return;
+
+        let immersiveActive = false;
+        let flipEndHandler = null;
+
+        const enterTop = 140;
+        const exitTop = 260;
+
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        const FLIP_MS = 680;
+        const FLIP_EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
+
+        const endFlipListener = () => {
+          if (flipEndHandler) {
+            videoFrame.removeEventListener("transitionend", flipEndHandler);
+            flipEndHandler = null;
+          }
+        };
+
+        const tryPlay = () => {
+          promoVideo.muted = true;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              const p = promoVideo.play();
+              if (p && typeof p.catch === "function") {
+                p.catch(() => {});
+              }
+            });
+          });
+        };
+
+        const clearFlipStyles = () => {
+          videoFrame.style.transition = "";
+          videoFrame.style.transform = "";
+          videoFrame.style.transformOrigin = "";
+          videoFrame.style.willChange = "";
+        };
+
+        const enterImmersive = () => {
+          if (prefersReducedMotion) {
+            body.classList.add("video-immersive");
+            immersiveActive = true;
+            tryPlay();
+            return;
+          }
+
+          endFlipListener();
+          const before = videoFrame.getBoundingClientRect();
+          body.classList.add("video-immersive");
+          immersiveActive = true;
+          void videoFrame.offsetWidth;
+          const after = videoFrame.getBoundingClientRect();
+
+          if (
+            after.width < 2 ||
+            after.height < 2 ||
+            before.width < 2 ||
+            before.height < 2
+          ) {
+            clearFlipStyles();
+            tryPlay();
+            return;
+          }
+
+          const dx = before.left - after.left;
+          const dy = before.top - after.top;
+          const sx = before.width / after.width;
+          const sy = before.height / after.height;
+
+          videoFrame.style.transformOrigin = "top left";
+          videoFrame.style.willChange = "transform";
+          videoFrame.style.transition = "none";
+          videoFrame.style.transform =
+            "translate(" + dx + "px, " + dy + "px) scale(" + sx + ", " + sy + ")";
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              videoFrame.style.transition =
+                "transform " + FLIP_MS + "ms " + FLIP_EASE;
+              videoFrame.style.transform = "translate(0, 0) scale(1, 1)";
+            });
+          });
+
+          tryPlay();
+
+          const onEnd = (e) => {
+            if (e.propertyName !== "transform") return;
+            endFlipListener();
+            clearFlipStyles();
+          };
+          flipEndHandler = onEnd;
+          videoFrame.addEventListener("transitionend", onEnd);
+        };
+
+        const exitImmersive = () => {
+          if (prefersReducedMotion) {
+            body.classList.remove("video-immersive");
+            immersiveActive = false;
+            return;
+          }
+
+          endFlipListener();
+          const before = videoFrame.getBoundingClientRect();
+          body.classList.remove("video-immersive");
+          immersiveActive = false;
+          void videoFrame.offsetWidth;
+          const after = videoFrame.getBoundingClientRect();
+
+          if (
+            after.width < 2 ||
+            after.height < 2 ||
+            before.width < 2 ||
+            before.height < 2
+          ) {
+            clearFlipStyles();
+            return;
+          }
+
+          const dx = before.left - after.left;
+          const dy = before.top - after.top;
+          const sx = before.width / after.width;
+          const sy = before.height / after.height;
+
+          videoFrame.style.transformOrigin = "top left";
+          videoFrame.style.willChange = "transform";
+          videoFrame.style.transition = "none";
+          videoFrame.style.transform =
+            "translate(" + dx + "px, " + dy + "px) scale(" + sx + ", " + sy + ")";
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              videoFrame.style.transition =
+                "transform " + FLIP_MS + "ms " + FLIP_EASE;
+              videoFrame.style.transform = "translate(0, 0) scale(1, 1)";
+            });
+          });
+
+          const onEnd = (e) => {
+            if (e.propertyName !== "transform") return;
+            endFlipListener();
+            clearFlipStyles();
+          };
+          flipEndHandler = onEnd;
+          videoFrame.addEventListener("transitionend", onEnd);
+        };
+
+        const setImmersiveMode = (shouldEnable) => {
+          if (shouldEnable === immersiveActive) return;
+          if (shouldEnable) enterImmersive();
+          else exitImmersive();
+        };
+
+        const updateImmersiveState = () => {
+          const top = promoSection.getBoundingClientRect().top;
+          if (!immersiveActive && top <= enterTop) {
+            setImmersiveMode(true);
+          } else if (immersiveActive && top > exitTop) {
+            setImmersiveMode(false);
+          }
+        };
+
+        window.addEventListener("scroll", updateImmersiveState, {
+          passive: true,
+        });
+        window.addEventListener("resize", updateImmersiveState);
+        updateImmersiveState();
+      })();
+    </script>
   </body>
 </html>
