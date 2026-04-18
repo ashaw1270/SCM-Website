@@ -14,6 +14,9 @@
   --ring: rgba(225, 29, 51, 0.45);
   --radius: 14px;
   --shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+  --page-pad-x: clamp(0.75rem, 4vw, 2rem);
+  /* Wide layout, still capped (not edge-to-edge) */
+  --content-max: 1280px;
 }
 
 *,
@@ -45,9 +48,10 @@ body {
 }
 
 .site-header-inner {
-  max-width: 1080px;
+  max-width: var(--content-max);
+  width: 100%;
   margin: 0 auto;
-  padding: 0.9rem 0.75rem 0.85rem 0;
+  padding: 0.9rem var(--page-pad-x) 0.85rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -107,9 +111,10 @@ body {
 }
 
 .page-content {
-  max-width: 1080px;
+  max-width: var(--content-max);
+  width: 100%;
   margin: 0 auto;
-  padding: clamp(1.5rem, 3vw, 2.5rem) 1rem 4rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem) var(--page-pad-x) 4rem;
   display: grid;
   gap: 1.25rem;
 }
@@ -159,7 +164,7 @@ h1 {
 
 .home-page .hero .hero-title-img {
   display: block;
-  width: min(92vw, 640px);
+  width: min(92vw, 780px);
   height: auto;
   margin: 0 auto;
 }
@@ -178,7 +183,7 @@ h2 {
   grid-template-columns: 1fr 1fr;
   gap: clamp(1rem, 3vw, 1.75rem);
   width: 100%;
-  max-width: 920px;
+  max-width: min(100%, 1120px);
   margin: 0 auto 1.5rem;
   text-align: left;
 }
@@ -291,7 +296,8 @@ h2 {
 .video-section p {
   font-family: "Chandler 42 W00 Medium";
   color: var(--text-muted);
-  max-width: 68ch;
+  max-width: min(80ch, 100%);
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -470,7 +476,8 @@ h2 {
   font-family: sans-serif;
   margin: 1.2rem auto 0;
   text-align: left;
-  width: min(100%, 660px);
+  width: min(100%, 820px);
+  max-width: 100%;
   display: grid;
   gap: 0.6rem;
 }
@@ -561,7 +568,7 @@ h2 {
 
 @media (max-width: 700px) {
   .site-header-inner {
-    padding: 0.7rem 0.7rem 0.75rem 0;
+    padding: 0.7rem var(--page-pad-x) 0.75rem;
     flex-direction: column;
     align-items: flex-start;
   }
