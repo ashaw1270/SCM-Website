@@ -39,6 +39,7 @@
         >
           <input type="hidden" name="_subject" value="New Booking Inquiry - Spice City Music" />
           <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" id="book-formsubmit-next" value="" />
           <input type="text" name="_honey" style="display: none" tabindex="-1" autocomplete="off" />
 
           <div class="form-row form-row-split">
@@ -74,5 +75,64 @@
         </form>
       </section>
     </main>
+
+    <dialog
+      id="book-thank-you-dialog"
+      class="thank-you-dialog"
+      aria-labelledby="book-thank-you-dialog-title"
+    >
+      <div class="thank-you-dialog-inner">
+        <h2 id="book-thank-you-dialog-title">Thank you!</h2>
+        <p class="thank-you-dialog-copy">
+          Your inquiry has been sent. We will get back to you as soon as we can.
+        </p>
+        <form method="dialog">
+          <button type="submit" class="cta-button thank-you-dialog-close">Close</button>
+        </form>
+      </div>
+    </dialog>
+
+    <script>
+      (function () {
+        const nextEl = document.getElementById("book-formsubmit-next");
+        if (nextEl) {
+          try {
+            const u = new URL(window.location.href);
+            u.search = "?thanks=1";
+            nextEl.value = u.toString();
+          } catch (e) {
+            nextEl.value =
+              window.location.origin + window.location.pathname + "?thanks=1";
+          }
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        const dlg = document.getElementById("book-thank-you-dialog");
+        if (!dlg) return;
+        function goToHero() {
+          window.location.href = "index.html";
+        }
+        dlg.addEventListener("close", goToHero);
+        var params = new URLSearchParams(window.location.search);
+        if (params.get("thanks") !== "1") return;
+        if (typeof dlg.showModal === "function") {
+          dlg.showModal();
+        } else {
+          window.alert(
+            "Thank you! Your inquiry has been sent. We will get back to you as soon as we can."
+          );
+          goToHero();
+        }
+        try {
+          var u = new URL(window.location.href);
+          u.search = "";
+          history.replaceState({}, "", u.toString());
+        } catch (err) {
+          /* ignore */
+        }
+      })();
+    </script>
   </body>
 </html>

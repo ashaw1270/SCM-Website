@@ -374,7 +374,6 @@
 
     <dialog id="thank-you-dialog" class="thank-you-dialog" aria-labelledby="thank-you-dialog-title">
       <div class="thank-you-dialog-inner">
-        <h2 id="thank-you-dialog-title">Thank you!</h2>
         <p class="thank-you-dialog-copy">
           Thank you for taking the time to fill out our event questionnaire! This will ensure your
           celebration is customized to be exactly what you hoped for, and more! Thank you for choosing Spice City Music.
@@ -451,6 +450,10 @@
       (function () {
         const dlg = document.getElementById("thank-you-dialog");
         if (!dlg) return;
+        function goToHero() {
+          window.location.href = "index.html";
+        }
+        dlg.addEventListener("close", goToHero);
         var params = new URLSearchParams(window.location.search);
         if (params.get("thanks") !== "1") return;
         if (typeof dlg.showModal === "function") {
@@ -459,6 +462,7 @@
           window.alert(
             "Thank you! Your questionnaire has been submitted successfully."
           );
+          goToHero();
         }
         try {
           var u = new URL(window.location.href);
