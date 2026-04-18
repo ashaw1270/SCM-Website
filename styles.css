@@ -1,3 +1,5 @@
+@import url(https://db.onlinewebfonts.com/c/459eef2ab5124684c6b0f3bf127b0bbd?family=Chandler+42+W00+Medium);
+
 :root {
   --bg: #ffffff;
   --bg-soft: #111116;
@@ -114,6 +116,7 @@ body {
 .hero,
 .content-card,
 .video-section {
+  font-family: "Chandler 42 W00 Medium";
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -146,11 +149,25 @@ h1 {
   line-height: 1.1;
 }
 
+/* Image replaces text; avoid stray line-box spacing */
+.home-page .hero h1.hero-title {
+  font-size: 0;
+  line-height: 0;
+}
+
+.home-page .hero .hero-title-img {
+  display: block;
+  width: min(92vw, 640px);
+  height: auto;
+  margin: 0 auto;
+}
+
 h2 {
   font-size: clamp(1.35rem, 3vw, 2rem);
 }
 
 .lead {
+  font-family: "Chandler 42 W00 Medium";
   margin: 0.9rem auto 0.7rem;
   font-size: clamp(1.05rem, 2.4vw, 1.32rem);
   font-weight: 600;
@@ -160,6 +177,7 @@ h2 {
 .hero-copy,
 .section-copy,
 .video-section p {
+  font-family: "Chandler 42 W00 Medium";
   color: var(--text-muted);
   max-width: 68ch;
   margin-left: auto;
