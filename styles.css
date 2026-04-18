@@ -268,7 +268,7 @@ h2 {
 
 .bio-text {
   margin: 0 0 0.65rem;
-  text-align: left !important;
+  text-align: justify;
 }
 
 .bio-text:last-child {
@@ -793,6 +793,12 @@ h2 {
 }
 
 @media (max-width: 700px) {
+  .bio-text,
+  .section-copy,
+  .about-us-heading {
+    text-align: left;
+  }
+
   .page-content {
     padding: clamp(1.1rem, 4vw, 1.6rem) var(--page-pad-x) 2.6rem;
   }
