@@ -265,6 +265,20 @@ h2 {
   margin-bottom: 0.35rem;
 }
 
+.about-cta-line {
+  font-family: "Chandler 42 W00 Medium" !important;
+  color: var(--brand) !important;
+  font-size: clamp(1.1rem, 2.6vw, 1.55rem);
+  text-align: center;
+  text-align-last: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.about-cta-actions {
+  margin-top: 0.85rem;
+}
+
 .lead {
   font-family: "Chandler 42 W00 Medium";
   margin: 0.9rem auto 0.7rem;
