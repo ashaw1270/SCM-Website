@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spice City Music | Event Form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="header-brand" href="index.html" aria-label="Spice City Music home">
+          <img
+            class="header-mark"
+            src="SCM Letters Transparent.png"
+            alt="Spice City Music"
+          />
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link" href="book-us.html">Book Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <section class="content-card">
+        <h1>Event Form</h1>
+        <p class="tell-us">
+          If you have already booked an upcoming event with us, please fill out the preference form below to help us customize your event.
+        </p>
+
+        <form
+          class="booking-form event-questionnaire"
+          action="https://formsubmit.co/ryanandadam@spicecitymusic.com"
+          method="POST"
+        >
+          <input
+            type="hidden"
+            name="_subject"
+            value="Event form (event-form.html) - Spice City Music"
+          />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" id="evf-formsubmit-next" value="" />
+          <input type="text" name="_honey" style="display: none" tabindex="-1" autocomplete="off" />
+
+          <div class="form-row form-row-split">
+            <div class="form-field-group">
+              <label for="evf-first-name">First Name</label>
+              <input
+                id="evf-first-name"
+                name="First Name"
+                type="text"
+                required
+                autocomplete="given-name"
+              />
+            </div>
+            <div class="form-field-group">
+              <label for="evf-last-name">Last Name</label>
+              <input
+                id="evf-last-name"
+                name="Last Name"
+                type="text"
+                required
+                autocomplete="family-name"
+              />
+            </div>
+          </div>
+
+          <label for="evf-email">Email</label>
+          <input id="evf-email" name="Email" type="email" required autocomplete="email" />
+
+          <label for="evf-phone">Phone Number</label>
+          <input id="evf-phone" name="Your Phone Number" type="tel" required autocomplete="tel" />
+
+          <div class="form-section-spacer" aria-hidden="true"></div>
+
+          <label for="evf-event-date">Event Date</label>
+          <input id="evf-event-date" name="Event Date" type="date" required />
+
+          <div class="form-row form-row-split">
+            <div class="form-field-group">
+              <label for="evf-dj-start">DJ start time</label>
+              <input
+                id="evf-dj-start"
+                name="DJ start time"
+                type="text"
+                required
+                autocomplete="off"
+                placeholder="e.g. 7:00 PM"
+              />
+            </div>
+            <div class="form-field-group">
+              <label for="evf-dj-end">DJ end time</label>
+              <input
+                id="evf-dj-end"
+                name="DJ end time"
+                type="text"
+                required
+                autocomplete="off"
+                placeholder="e.g. 11:00 PM"
+              />
+            </div>
+          </div>
+
+          <fieldset class="booking-form-fieldset address-fieldset">
+            <div class="form-row form-row-split">
+              <div class="form-field-group">
+                <label for="evf-address1">Street address</label>
+                <input
+                  id="evf-address1"
+                  name="Venue Street Address"
+                  type="text"
+                  required
+                  autocomplete="address-line1"
+                  placeholder="123 Main Street"
+                />
+              </div>
+              <div class="form-field-group">
+                <label for="evf-address2">Apt, suite, unit (optional)</label>
+                <input
+                  id="evf-address2"
+                  name="Venue Address Line 2"
+                  type="text"
+                  autocomplete="address-line2"
+                />
+              </div>
+            </div>
+
+            <div class="form-row form-row-address">
+              <div class="form-field-group">
+                <label for="evf-city">City</label>
+                <input
+                  id="evf-city"
+                  name="Venue City"
+                  type="text"
+                  required
+                  autocomplete="address-level2"
+                />
+              </div>
+              <div class="form-field-group">
+                <label for="evf-state">State</label>
+                <select id="evf-state" name="Venue State" required autocomplete="address-level1">
+          <option value="">Select state</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="MI">Michigan</option>
+          <option value="WI">Wisconsin</option>
+                </select>
+              </div>
+              <div class="form-field-group">
+                <label for="evf-zip">ZIP code</label>
+                <input
+                  id="evf-zip"
+                  name="Venue ZIP"
+                  type="text"
+                  required
+                  inputmode="numeric"
+                  autocomplete="postal-code"
+                  pattern="[0-9]{5}(-[0-9]{4})?"
+                  title="Five digits, optional +4"
+                  placeholder="60062"
+                />
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="form-section-spacer" aria-hidden="true"></div>
+
+          <div class="event-form-after-address">
+          <div class="form-question">
+            <label for="evf-reason">
+              Please describe the reason for celebration. If applicable, please share the name of your
+              person(s) of honor.
+            </label>
+            <textarea id="evf-reason" name="Reason for celebration / guest(s) of honor" rows="4"></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="evf-setup">
+              Where will we be setting up at your venue? Please include terrain that we will be setting up
+              on, if applicable.
+            </label>
+            <textarea id="evf-setup" name="Setup location at venue" rows="4"></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="evf-parking">
+              Where can we park upon arrival at the venue? Please include a contact of venue manager if
+              unsure.
+            </label>
+            <textarea id="evf-parking" name="Parking / venue manager contact" rows="4"></textarea>
+          </div>
+
+          <fieldset class="booking-form-fieldset indoor-outdoor-fieldset">
+            <legend>Is your event indoors or outdoors?</legend>
+            <div class="form-radio-row">
+              <label class="form-radio-label">
+                <input
+                  type="radio"
+                  name="Indoors or outdoors"
+                  id="evf-indoors"
+                  value="Indoors"
+                  required
+                />
+                Indoors
+              </label>
+              <label class="form-radio-label">
+                <input
+                  type="radio"
+                  name="Indoors or outdoors"
+                  id="evf-outdoors"
+                  value="Outdoors"
+                />
+                Outdoors
+              </label>
+            </div>
+          </fieldset>
+
+          <div id="evf-rain-backup-block" class="form-field-group event-conditional-block" hidden>
+            <label for="evf-rain-backup">
+              Please provide your alternative party location in case of rain/severe weather.
+            </label>
+            <textarea
+              id="evf-rain-backup"
+              name="Rain/severe weather backup location"
+              rows="3"
+              autocomplete="off"
+            ></textarea>
+          </div>
+
+          <div id="evf-shade-block" class="shade-outdoor-block" hidden>
+            <fieldset class="booking-form-fieldset shade-fieldset">
+              <legend>
+                If the event is during the day, will there be shade to protect our equipment?
+              </legend>
+              <div class="form-radio-row form-radio-row--shade">
+                <label class="form-radio-label">
+                  <input
+                    type="radio"
+                    name="Shade for equipment (daytime outdoor)"
+                    id="evf-shade-yes"
+                    value="Yes"
+                  />
+                  Yes
+                </label>
+                <label class="form-radio-label">
+                  <input
+                    type="radio"
+                    name="Shade for equipment (daytime outdoor)"
+                    id="evf-shade-no"
+                    value="No (we can provide a canopy if necessary)"
+                  />
+                  No (we can provide a canopy if necessary)
+                </label>
+                <label class="form-radio-label">
+                  <input
+                    type="radio"
+                    name="Shade for equipment (daytime outdoor)"
+                    id="evf-shade-night"
+                    value="Event is at night"
+                  />
+                  Event is at night
+                </label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="form-question-block attendees-question">
+            <div class="form-row form-row-split">
+              <div class="form-field-group">
+                <label for="evf-kids">How many kids? (Estimate)</label>
+                <input
+                  id="evf-kids"
+                  name="How many kids"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  placeholder="e.g. 60"
+                />
+              </div>
+              <div class="form-field-group">
+                <label for="evf-adults">How many adults? (Estimate)</label>
+                <input
+                  id="evf-adults"
+                  name="How many adults"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  placeholder="e.g. 40"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-question">
+            <label for="evf-theme">Does your event have a theme? If so, explain below:</label>
+            <textarea id="evf-theme" name="Event theme" rows="3"></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="evf-speeches">
+              Please list below any special guests that will be giving a speech: (if applicable)
+            </label>
+            <textarea id="evf-speeches" name="Guests giving speeches" rows="3"></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="evf-preferred-music">
+              Please list any preferred songs/music/genres below: (include artists if you can)
+            </label>
+            <textarea id="evf-preferred-music" name="Preferred songs / music / genres" rows="4"></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="evf-do-not-play">Please list any DO NOT PLAY songs/music below:</label>
+            <textarea id="evf-do-not-play" name="DO NOT PLAY" rows="3"></textarea>
+          </div>
+
+          <div class="form-question">
+            <label for="evf-line-dances">
+              Please list any line dances that you would like included: (e.g., Cha-Cha-Slide, Electric
+              Slide, Cupid Shuffle)
+            </label>
+            <textarea id="evf-line-dances" name="Line dances" rows="3"></textarea>
+          </div>
+
+          <fieldset class="booking-form-fieldset">
+            <legend>
+              Would you like us to play any games with the attendees? We will reach out if the answer is
+              yes.
+            </legend>
+            <div class="form-radio-row">
+              <label class="form-radio-label">
+                <input type="radio" name="Games with attendees" value="Yes" required />
+                Yes
+              </label>
+              <label class="form-radio-label">
+                <input type="radio" name="Games with attendees" value="No" />
+                No
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-question">
+            <label for="evf-food">
+              Is food being served to guests? If so, please include timing so we can plan around the
+              timing.
+            </label>
+            <textarea id="evf-food" name="Food / timing" rows="4"></textarea>
+          </div>
+
+          <div class="form-question-block closing-question">
+            <p class="section-copy closing-question-intro">
+              <span style="color: var(--brand);">The only thing we will need from you is a source
+              of electricity.</span> We will arrive 45–90 minutes prior to start time for setup. If you have any
+              comments, questions, or concerns, please let us know in the box below.
+            </p>
+            <textarea
+              id="evf-final-comments"
+              name="Comments / questions / concerns"
+              rows="5"
+              autocomplete="off"
+            ></textarea>
+          </div>
+
+          </div>
+
+          <button type="submit">Submit questionnaire</button>
+        </form>
+      </section>
+    </main>
+
+    <dialog id="thank-you-dialog" class="thank-you-dialog" aria-labelledby="thank-you-dialog-title">
+      <div class="thank-you-dialog-inner">
+        <h2 id="thank-you-dialog-title">Thank you!</h2>
+        <p class="thank-you-dialog-copy">
+          Thank you for taking the time to fill out our event questionnaire! This will ensure your
+          celebration is customized to be exactly what you hoped for, and more! Thank you for choosing Spice City Music.
+        </p>
+        <form method="dialog">
+          <button type="submit" class="cta-button thank-you-dialog-close">Close</button>
+        </form>
+      </div>
+    </dialog>
+
+    <script>
+      (function () {
+        const nextEl = document.getElementById("evf-formsubmit-next");
+        if (nextEl) {
+          try {
+            const u = new URL(window.location.href);
+            u.search = "?thanks=1";
+            nextEl.value = u.toString();
+          } catch (e) {
+            nextEl.value =
+              window.location.origin + window.location.pathname + "?thanks=1";
+          }
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        const indoorOutdoorRadios = document.querySelectorAll(
+          'input[name="Indoors or outdoors"]'
+        );
+        const rainBlock = document.getElementById("evf-rain-backup-block");
+        const rainTa = document.getElementById("evf-rain-backup");
+        const shadeBlock = document.getElementById("evf-shade-block");
+        const shadeRadios = shadeBlock
+          ? shadeBlock.querySelectorAll('input[type="radio"]')
+          : [];
+        if (
+          !indoorOutdoorRadios.length ||
+          !rainBlock ||
+          !rainTa ||
+          !shadeBlock ||
+          shadeRadios.length === 0
+        ) {
+          return;
+        }
+
+        function syncOutdoorOnlyQuestions() {
+          const checked = document.querySelector(
+            'input[name="Indoors or outdoors"]:checked'
+          );
+          const outdoor = checked && checked.value === "Outdoors";
+          rainBlock.hidden = !outdoor;
+          rainTa.required = outdoor;
+          if (!outdoor) rainTa.value = "";
+
+          shadeBlock.hidden = !outdoor;
+          shadeRadios.forEach(function (radio, index) {
+            if (!outdoor) {
+              radio.checked = false;
+              radio.required = false;
+            } else {
+              radio.required = index === 0;
+            }
+          });
+        }
+
+        indoorOutdoorRadios.forEach(function (radio) {
+          radio.addEventListener("change", syncOutdoorOnlyQuestions);
+        });
+        syncOutdoorOnlyQuestions();
+      })();
+    </script>
+    <script>
+      (function () {
+        const dlg = document.getElementById("thank-you-dialog");
+        if (!dlg) return;
+        var params = new URLSearchParams(window.location.search);
+        if (params.get("thanks") !== "1") return;
+        if (typeof dlg.showModal === "function") {
+          dlg.showModal();
+        } else {
+          window.alert(
+            "Thank you! Your questionnaire has been submitted successfully."
+          );
+        }
+        try {
+          var u = new URL(window.location.href);
+          u.search = "";
+          history.replaceState({}, "", u.toString());
+        } catch (err) {
+          /* ignore */
+        }
+      })();
+    </script>
+  </body>
+</html>

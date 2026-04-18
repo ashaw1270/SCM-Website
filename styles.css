@@ -17,6 +17,7 @@
   --page-pad-x: clamp(0.75rem, 4vw, 2rem);
   /* Wide layout, still capped (not edge-to-edge) */
   --content-max: 1280px;
+  --booking-form-max-width: 820px;
 }
 
 *,
@@ -476,7 +477,7 @@ h2 {
   font-family: sans-serif;
   margin: 1.2rem auto 0;
   text-align: left;
-  width: min(100%, 820px);
+  width: min(100%, var(--booking-form-max-width));
   max-width: 100%;
   display: grid;
   gap: 0.6rem;
@@ -490,7 +491,8 @@ h2 {
 }
 
 .booking-form input,
-.booking-form textarea {
+.booking-form textarea,
+.booking-form select {
   width: 100%;
   padding: 0.78rem 0.85rem;
   border: 1px solid #3a3b46;
@@ -501,13 +503,19 @@ h2 {
   transition: border-color 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
 }
 
+.booking-form select {
+  cursor: pointer;
+}
+
 .booking-form input:hover,
-.booking-form textarea:hover {
+.booking-form textarea:hover,
+.booking-form select:hover {
   border-color: #50525f;
 }
 
 .booking-form input:focus,
-.booking-form textarea:focus {
+.booking-form textarea:focus,
+.booking-form select:focus {
   font-family: sans-serif;
   border-color: var(--brand-soft);
   box-shadow: 0 0 0 4px var(--ring);
@@ -532,6 +540,202 @@ h2 {
 .booking-form button:focus-visible {
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(225, 29, 51, 0.34);
+}
+
+.event-form-intro {
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Event form: match intro copy width to the questionnaire column */
+.content-card:has(.event-questionnaire) > .tell-us {
+  max-width: min(100%, var(--booking-form-max-width));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.event-questionnaire {
+  --event-form-stack-gap: 2.5rem;
+  --event-form-grid-gap: 0.85rem;
+  gap: var(--event-form-grid-gap);
+}
+
+.form-section-spacer {
+  display: block;
+  padding: 0.65rem 0;
+  margin: 0;
+}
+
+.event-form-after-address {
+  display: flex;
+  flex-direction: column;
+  gap: var(--event-form-stack-gap);
+}
+
+.event-questionnaire > button[type="submit"] {
+  /* Match space before submit to inter-question gap (form grid gap already counts once) */
+  margin-top: calc(var(--event-form-stack-gap) - var(--event-form-grid-gap));
+}
+
+.event-form-after-address > .form-question {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.event-questionnaire textarea {
+  min-height: 2.75rem;
+}
+
+.form-row-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1rem;
+  align-items: start;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+/* Native [hidden] loses to .form-field-group { display: flex } without this */
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 540px) {
+  .form-row-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-row-address {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr 1fr;
+  gap: 0.75rem 1rem;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .form-row-address {
+    grid-template-columns: 1fr;
+  }
+}
+
+.address-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.15rem;
+}
+
+.booking-form-fieldset {
+  border: 0;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.booking-form-fieldset legend {
+  font-family: "Chandler 42 W00 Regular";
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0;
+  margin-bottom: 0.45rem;
+  line-height: 1.45;
+}
+
+.form-radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.form-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form-radio-label input {
+  width: auto;
+  margin: 0;
+  accent-color: var(--brand);
+}
+
+.event-form-thanks {
+  margin: 1rem 0 0.25rem;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.form-question-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.closing-question-intro {
+  margin: 0;
+  text-align: left;
+  text-align-last: left;
+}
+
+.thank-you-dialog {
+  border: none;
+  border-radius: var(--radius);
+  padding: 0;
+  max-width: min(92vw, 26rem);
+  box-shadow: var(--shadow);
+  font-family: "Chandler 42 W00 Medium", serif;
+}
+
+.thank-you-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.thank-you-dialog-inner {
+  padding: clamp(1.35rem, 4vw, 2.1rem);
+  text-align: center;
+}
+
+.thank-you-dialog-inner h2 {
+  margin: 0 0 0.75rem;
+}
+
+.thank-you-dialog-copy {
+  font-family: "Chandler 42 W00 Regular", serif;
+  color: var(--text-muted);
+  margin: 0 0 1.25rem;
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+
+.thank-you-dialog-close {
+  margin: 0 auto;
+}
+
+.attendees-lead {
+  margin: 0;
+}
+
+.form-radio-row--shade {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+
+.shade-fieldset {
+  margin: 0;
+  min-width: 0;
 }
 
 /* Do not put transform on .video-section: it breaks position:fixed descendants (fullscreen video). */
