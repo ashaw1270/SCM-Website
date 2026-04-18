@@ -168,6 +168,103 @@ h2 {
   font-size: clamp(1.35rem, 3vw, 2rem);
 }
 
+.team-bios-heading {
+  margin: 1.75rem auto 1.1rem;
+  text-align: center;
+}
+
+.team-bios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 3vw, 1.75rem);
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto 1.5rem;
+  text-align: left;
+}
+
+.bio-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1rem 0.85rem 1.15rem;
+  border: 1px solid rgba(44, 45, 54, 0.65);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.bio-figure {
+  margin: 0 0 0.85rem;
+}
+
+.bio-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid #292a33;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.bio-name {
+  font-family: "Chandler 42 W00 Medium", serif;
+  color: rgba(237, 28, 36);
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+  letter-spacing: 0.01em;
+}
+
+.bio-role {
+  font-family: "Chandler 42 W00 Medium", serif;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin: 0 0 0.65rem;
+  flex-shrink: 0;
+}
+
+.bio-scroll {
+  min-height: 0;
+  max-height: clamp(11rem, 32vh, 16rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 0.4rem;
+  margin-right: -0.15rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+
+.bio-scroll:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.bio-text {
+  margin: 0 0 0.65rem;
+  text-align: left;
+}
+
+.bio-text:last-child {
+  margin-bottom: 0;
+}
+
+.services-lead {
+  margin-bottom: 0.35rem;
+}
+
+.services-list {
+  margin-top: 0;
+  padding-left: 1.35rem;
+  text-align: left;
+}
+
+.services-list li {
+  margin-bottom: 0.35rem;
+}
+
 .lead {
   font-family: "Chandler 42 W00 Medium";
   margin: 0.9rem auto 0.7rem;
@@ -356,7 +453,7 @@ h2 {
 }
 
 .booking-form {
-  font-family: "sans-serif";
+  font-family: sans-serif;
   margin: 1.2rem auto 0;
   text-align: left;
   width: min(100%, 660px);
@@ -390,7 +487,7 @@ h2 {
 
 .booking-form input:focus,
 .booking-form textarea:focus {
-  font-family: "sans-serif";
+  font-family: sans-serif;
   border-color: var(--brand-soft);
   box-shadow: 0 0 0 4px var(--ring);
   outline: none;
@@ -469,11 +566,13 @@ h2 {
     padding: 0.45rem 0.8rem;
     font-size: 0.9rem;
   }
-}
 
-@media (max-width: 700px) {
   .home-page.video-immersive .video-frame video {
     object-fit: contain;
+  }
+
+  .team-bios {
+    grid-template-columns: 1fr;
   }
 }
 
