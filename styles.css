@@ -8,7 +8,7 @@
   --surface-strong: #1d1d27;
   --text: #171821;
   --text-muted: #4f5462;
-  --brand: #e11d33;
+  --brand: #ed1c24;
   --brand-soft: #ff3b57;
   --border: #2c2d36;
   --ring: rgba(225, 29, 51, 0.45);
@@ -205,6 +205,16 @@ h2 {
   text-align: justify;
 }
 
+.tell-us {
+  font-family: "Chandler 42 W00 Medium";
+  color: var(--text-muted);
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .hero-actions {
   margin-top: 1.2rem;
   display: flex;
@@ -346,6 +356,7 @@ h2 {
 }
 
 .booking-form {
+  font-family: "sans-serif";
   margin: 1.2rem auto 0;
   text-align: left;
   width: min(100%, 660px);
@@ -354,7 +365,8 @@ h2 {
 }
 
 .booking-form label {
-  color: #e6e7ee;
+  font-family: "Chandler 42 W00 Regular";
+  color: var(--text-muted);
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -367,7 +379,7 @@ h2 {
   border-radius: 10px;
   font: inherit;
   color: var(--text);
-  background: var(--surface-strong);
+  background: white;
   transition: border-color 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
 }
 
@@ -378,10 +390,11 @@ h2 {
 
 .booking-form input:focus,
 .booking-form textarea:focus {
+  font-family: "sans-serif";
   border-color: var(--brand-soft);
   box-shadow: 0 0 0 4px var(--ring);
   outline: none;
-  background: #232432;
+  background: white;
 }
 
 .booking-form button {
