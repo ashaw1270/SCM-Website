@@ -34,13 +34,12 @@
 
         <form
           class="booking-form"
-          action="https://formsubmit.co/ryanandadam@spicecitymusic.com"
+          action="https://formspree.io/f/xkoywdwo"
           method="POST"
         >
           <input type="hidden" name="_subject" value="New Booking Inquiry - Spice City Music" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" id="book-formsubmit-next" value="" />
-          <input type="text" name="_honey" style="display: none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_next" id="book-formspree-next" value="" />
+          <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
 
           <div class="form-row form-row-split">
             <div class="form-field-group">
@@ -134,7 +133,7 @@
 
     <script>
       (function () {
-        const nextEl = document.getElementById("book-formsubmit-next");
+        const nextEl = document.getElementById("book-formspree-next");
         if (nextEl) {
           try {
             const u = new URL(window.location.href);

@@ -33,7 +33,7 @@
 
         <form
           class="booking-form event-questionnaire"
-          action="https://formsubmit.co/ryanandadam@spicecitymusic.com"
+          action="https://formspree.io/f/mgodwgee"
           method="POST"
         >
           <input
@@ -41,9 +41,8 @@
             name="_subject"
             value="Event form (event-form.html) - Spice City Music"
           />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" id="evf-formsubmit-next" value="" />
-          <input type="text" name="_honey" style="display: none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_next" id="evf-formspree-next" value="" />
+          <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
 
           <div class="form-row form-row-split">
             <div class="form-field-group">
@@ -426,7 +425,7 @@
 
     <script>
       (function () {
-        const nextEl = document.getElementById("evf-formsubmit-next");
+        const nextEl = document.getElementById("evf-formspree-next");
         if (nextEl) {
           try {
             const u = new URL(window.location.href);
