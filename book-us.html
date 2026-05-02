@@ -38,7 +38,6 @@
           method="POST"
         >
           <input type="hidden" name="_subject" value="New Booking Inquiry - Spice City Music" />
-          <input type="hidden" name="_next" id="book-formspree-next" value="" />
           <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
 
           <div class="form-row form-row-split">
@@ -133,44 +132,63 @@
 
     <script>
       (function () {
-        const nextEl = document.getElementById("book-formspree-next");
-        if (nextEl) {
-          try {
-            const u = new URL(window.location.href);
-            u.search = "?thanks=1";
-            nextEl.value = u.toString();
-          } catch (e) {
-            nextEl.value =
-              window.location.origin + window.location.pathname + "?thanks=1";
-          }
-        }
-      })();
-    </script>
-    <script>
-      (function () {
+        const form = document.querySelector("main form.booking-form");
         const dlg = document.getElementById("book-thank-you-dialog");
-        if (!dlg) return;
-        function goToHero() {
-          window.location.href = "index.html";
-        }
-        dlg.addEventListener("close", goToHero);
-        var params = new URLSearchParams(window.location.search);
-        if (params.get("thanks") !== "1") return;
-        if (typeof dlg.showModal === "function") {
-          dlg.showModal();
-        } else {
-          window.alert(
-            "Thank you! Your inquiry has been sent. We will get back to you as soon as we can."
-          );
-          goToHero();
-        }
-        try {
-          var u = new URL(window.location.href);
-          u.search = "";
-          history.replaceState({}, "", u.toString());
-        } catch (err) {
-          /* ignore */
-        }
+        if (!form || !dlg) return;
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const prevText = submitBtn ? submitBtn.textContent : "";
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending…";
+          }
+
+          fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          })
+            .then(function (res) {
+              return res.json().then(function (data) {
+                return { res: res, data: data };
+              });
+            })
+            .then(function (result) {
+              if (result.res.ok && result.data && result.data.ok) {
+                form.reset();
+                if (typeof dlg.showModal === "function") {
+                  dlg.showModal();
+                } else {
+                  window.alert(
+                    "Thank you! Your inquiry has been sent. We will get back to you as soon as we can."
+                  );
+                }
+              } else {
+                var msg =
+                  (result.data && result.data.error) ||
+                  "Something went wrong. Please try again or email us.";
+                window.alert(msg);
+              }
+            })
+            .catch(function () {
+              window.alert(
+                "We could not send your form. Check your connection and try again."
+              );
+            })
+            .finally(function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = prevText;
+              }
+            });
+        });
       })();
     </script>
   </body>

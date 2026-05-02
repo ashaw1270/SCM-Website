@@ -41,7 +41,6 @@
             name="_subject"
             value="Event form (event-form.html) - Spice City Music"
           />
-          <input type="hidden" name="_next" id="evf-formspree-next" value="" />
           <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
 
           <div class="form-row form-row-split">
@@ -413,8 +412,9 @@
 
     <dialog id="thank-you-dialog" class="thank-you-dialog" aria-labelledby="thank-you-dialog-title">
       <div class="thank-you-dialog-inner">
+        <h2 id="thank-you-dialog-title">Thank you!</h2>
         <p class="thank-you-dialog-copy">
-          Thank you for taking the time to fill out our event questionnaire! This will ensure your
+          Thank you for taking the time to fill out our event questionnaire. This will ensure your
           celebration is customized to be exactly what you hoped for, and more! Thank you for choosing Spice City Music.
         </p>
         <form method="dialog">
@@ -423,21 +423,6 @@
       </div>
     </dialog>
 
-    <script>
-      (function () {
-        const nextEl = document.getElementById("evf-formspree-next");
-        if (nextEl) {
-          try {
-            const u = new URL(window.location.href);
-            u.search = "?thanks=1";
-            nextEl.value = u.toString();
-          } catch (e) {
-            nextEl.value =
-              window.location.origin + window.location.pathname + "?thanks=1";
-          }
-        }
-      })();
-    </script>
     <script>
       (function () {
         const indoorOutdoorRadios = document.querySelectorAll(
@@ -483,33 +468,74 @@
           radio.addEventListener("change", syncOutdoorOnlyQuestions);
         });
         syncOutdoorOnlyQuestions();
+
+        const evForm = document.querySelector("form.booking-form.event-questionnaire");
+        if (evForm) {
+          evForm.addEventListener("reset", function () {
+            setTimeout(syncOutdoorOnlyQuestions, 0);
+          });
+        }
       })();
     </script>
     <script>
       (function () {
+        const form = document.querySelector("form.booking-form.event-questionnaire");
         const dlg = document.getElementById("thank-you-dialog");
-        if (!dlg) return;
-        function goToHero() {
-          window.location.href = "index.html";
-        }
-        dlg.addEventListener("close", goToHero);
-        var params = new URLSearchParams(window.location.search);
-        if (params.get("thanks") !== "1") return;
-        if (typeof dlg.showModal === "function") {
-          dlg.showModal();
-        } else {
-          window.alert(
-            "Thank you! Your questionnaire has been submitted successfully."
-          );
-          goToHero();
-        }
-        try {
-          var u = new URL(window.location.href);
-          u.search = "";
-          history.replaceState({}, "", u.toString());
-        } catch (err) {
-          /* ignore */
-        }
+        if (!form || !dlg) return;
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const prevText = submitBtn ? submitBtn.textContent : "";
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending…";
+          }
+
+          fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          })
+            .then(function (res) {
+              return res.json().then(function (data) {
+                return { res: res, data: data };
+              });
+            })
+            .then(function (result) {
+              if (result.res.ok && result.data && result.data.ok) {
+                form.reset();
+                if (typeof dlg.showModal === "function") {
+                  dlg.showModal();
+                } else {
+                  window.alert(
+                    "Thank you! Your questionnaire has been submitted successfully."
+                  );
+                }
+              } else {
+                var msg =
+                  (result.data && result.data.error) ||
+                  "Something went wrong. Please try again or email us.";
+                window.alert(msg);
+              }
+            })
+            .catch(function () {
+              window.alert(
+                "We could not send your form. Check your connection and try again."
+              );
+            })
+            .finally(function () {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = prevText;
+              }
+            });
+        });
       })();
     </script>
   </body>
