@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Spice City Music | Invoice Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="invoice-builder-page">
+    <header class="site-header invoice-builder-header">
+      <div class="site-header-inner">
+        <a class="header-brand" href="index.html" aria-label="Spice City Music home">
+          <img
+            class="header-mark"
+            src="SCM Letters Transparent.png"
+            alt="Spice City Music"
+          />
+        </a>
+      </div>
+    </header>
+
+    <main class="page-content invoice-builder-main">
+      <section id="invoice-form-section" class="content-card invoice-form-card">
+        <h1>Invoice Generator</h1>
+        <p class="tell-us">
+          Fill in the event details below. Your invoice will open right away so you can save it as a PDF.
+        </p>
+
+        <form id="invoice-builder-form" class="booking-form invoice-builder-form" novalidate>
+          <label for="inv-client-name">Client name</label>
+          <input
+            id="inv-client-name"
+            name="clientName"
+            type="text"
+            required
+            autocomplete="name"
+            placeholder="e.g. Jane Smith"
+          />
+
+          <label for="inv-event-date">Event date</label>
+          <input id="inv-event-date" name="eventDate" type="date" required />
+
+          <label for="inv-event-name">Event name</label>
+          <input
+            id="inv-event-name"
+            name="eventName"
+            type="text"
+            required
+            autocomplete="off"
+            placeholder="e.g. Sarah's Bat Mitzvah"
+          />
+
+          <div class="form-row form-row-split">
+            <div class="form-field-group">
+              <label for="inv-hourly-rate">Hourly rate ($)</label>
+              <input
+                id="inv-hourly-rate"
+                name="hourlyRate"
+                type="number"
+                required
+                min="0"
+                step="0.01"
+                inputmode="decimal"
+                placeholder="e.g. 350"
+              />
+            </div>
+            <div class="form-field-group">
+              <label for="inv-hours">Hours</label>
+              <input
+                id="inv-hours"
+                name="hours"
+                type="number"
+                required
+                min="0.25"
+                step="0.25"
+                inputmode="decimal"
+                placeholder="e.g. 4"
+              />
+            </div>
+          </div>
+
+          <button type="submit" id="invoice-submit-btn">Generate invoice PDF</button>
+        </form>
+      </section>
+
+      <section
+        id="invoice-output-section"
+        class="invoice-output-section"
+        hidden
+        aria-hidden="true"
+      >
+        <article id="invoice-document" class="invoice-document" aria-label="Generated invoice">
+          <header class="invoice-doc-header">
+            <div class="invoice-doc-brand">
+              <img
+                class="invoice-doc-logo"
+                src="logo.png"
+                alt="Spice City Music"
+              />
+            </div>
+            <div class="invoice-doc-meta">
+              <h2 class="invoice-doc-title">Invoice</h2>
+              <dl class="invoice-meta-list">
+                <div>
+                  <dt>Invoice #</dt>
+                  <dd id="inv-out-number">—</dd>
+                </div>
+                <div>
+                  <dt>Invoice date</dt>
+                  <dd id="inv-out-invoice-date">—</dd>
+                </div>
+              </dl>
+            </div>
+          </header>
+
+          <div class="invoice-doc-parties">
+            <div class="invoice-bill-to">
+              <h3>Bill to</h3>
+              <p id="inv-out-client" class="invoice-party-name">—</p>
+            </div>
+            <div class="invoice-from">
+              <h3>From</h3>
+              <p class="invoice-party-name">Spice City Music, LLC</p>
+              <p>
+                1455 Portsmouth Court, Northbrook, IL 60062
+              </p>
+              <p><a href="tel:+18479032952">(847) 903-2952</a></p>
+              <p>
+                <a href="mailto:ryanandadam@spicecitymusic.com">ryanandadam@spicecitymusic.com</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="invoice-event-summary">
+            <h3>Event details</h3>
+            <dl class="invoice-event-details">
+              <div>
+                <dt>Event:</dt>
+                <dd id="inv-out-event-name">—</dd>
+              </div>
+              <div>
+                <dt>Event date:</dt>
+                <dd id="inv-out-event-date">—</dd>
+              </div>
+            </dl>
+          </div>
+
+          <table class="invoice-line-table">
+            <caption class="visually-hidden">Invoice line items</caption>
+            <thead>
+              <tr>
+                <th scope="col">Description</th>
+                <th scope="col" class="invoice-col-qty">Hours</th>
+                <th scope="col" class="invoice-col-rate">Rate</th>
+                <th scope="col" class="invoice-col-amount">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td id="inv-out-line-desc">DJ &amp; entertainment services</td>
+                <td class="invoice-col-qty" id="inv-out-hours">—</td>
+                <td class="invoice-col-rate" id="inv-out-rate">—</td>
+                <td class="invoice-col-amount" id="inv-out-line-total">—</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="invoice-total-row">
+                <th scope="row" colspan="3">Total due prior to start of event</th>
+                <td class="invoice-col-amount" id="inv-out-total">—</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <footer class="invoice-doc-footer">
+            <p class="invoice-thanks">Thank you for choosing Spice City Music!</p>
+
+            <section class="invoice-payment-options" aria-labelledby="invoice-payment-heading">
+              <h3 id="invoice-payment-heading">Payment options</h3>
+              <ul class="invoice-payment-list">
+                <li>
+                  <strong>Venmo:</strong>
+                  <a href="https://venmo.com/spicecitymusic">@spicecitymusic</a>
+                </li>
+                <li>
+                  <strong>Zelle:</strong>
+                  <a href="tel:+18479032952">(847) 903-2952</a>
+                </li>
+                <li><strong>Cash</strong></li>
+                <li class="invoice-payment-check">
+                  <strong>Check</strong>, payable to:
+                  <address class="invoice-check-address">
+                    Ryan Kreiter<br />
+                    1455 Portsmouth Court<br />
+                    Northbrook, IL 60062
+                  </address>
+                </li>
+              </ul>
+            </section>
+
+            <p class="invoice-payment-note">
+              Please contact us with any questions about this invoice.
+            </p>
+          </footer>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer no-print">
+      <nav class="footer-social" aria-label="Contact and social links">
+        <a class="footer-link" href="tel:+18479032952" aria-label="Call (847) 903-2952">
+          (847) 903-2952
+        </a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <a
+          class="footer-link"
+          href="mailto:ryanandadam@spicecitymusic.com"
+          aria-label="Email ryanandadam@spicecitymusic.com"
+        >
+          ryanandadam@spicecitymusic.com
+        </a>
+      </nav>
+    </footer>
+
+    <script>
+      (function () {
+        const form = document.getElementById("invoice-builder-form");
+        const submitBtn = document.getElementById("invoice-submit-btn");
+        const logo = document.querySelector(".invoice-doc-logo");
+
+        const currency = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        });
+
+        const longDate = new Intl.DateTimeFormat("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+
+        const defaultPageTitle = document.title;
+
+        function formatInvoiceFileDate(dateStr) {
+          var d = new Date(dateStr + "T12:00:00");
+          if (isNaN(d.getTime())) return "";
+          return (
+            d.getMonth() +
+            1 +
+            "/" +
+            d.getDate() +
+            "/" +
+            String(d.getFullYear()).slice(-2)
+          );
+        }
+
+        function buildInvoiceDocumentTitle(eventName, eventDateRaw) {
+          var safeName = eventName.replace(/[/\\:*?"<>|]/g, "").trim() || "Event";
+          var shortDate = formatInvoiceFileDate(eventDateRaw);
+          return "Spice City Music Invoice — " + safeName + " " + shortDate;
+        }
+
+        function formatHours(hours) {
+          var n = Number(hours);
+          if (!Number.isFinite(n)) return "—";
+          return n % 1 === 0 ? String(n) : String(n);
+        }
+
+        function invoiceNumber(eventDate) {
+          var d = eventDate ? new Date(eventDate + "T12:00:00") : new Date();
+          var y = d.getFullYear();
+          var m = String(d.getMonth() + 1).padStart(2, "0");
+          var day = String(d.getDate()).padStart(2, "0");
+          var suffix = String(Date.now()).slice(-4);
+          return "SCM-" + y + m + day + "-" + suffix;
+        }
+
+        function setText(id, text) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = text;
+        }
+
+        function populateInvoice() {
+          var clientName = document.getElementById("inv-client-name").value.trim();
+          var eventDateRaw = document.getElementById("inv-event-date").value;
+          var eventName = document.getElementById("inv-event-name").value.trim();
+          var hourlyRate = parseFloat(document.getElementById("inv-hourly-rate").value, 10);
+          var hours = parseFloat(document.getElementById("inv-hours").value, 10);
+          var lineTotal = hourlyRate * hours;
+          var eventDateObj = new Date(eventDateRaw + "T12:00:00");
+          var today = new Date();
+
+          setText("inv-out-number", invoiceNumber(eventDateRaw));
+          setText("inv-out-invoice-date", longDate.format(today));
+          setText("inv-out-client", clientName);
+          setText("inv-out-event-name", eventName);
+          setText("inv-out-event-date", longDate.format(eventDateObj));
+          setText("inv-out-line-desc", "DJ services");
+          setText("inv-out-hours", formatHours(hours) + " hrs");
+          setText("inv-out-rate", currency.format(hourlyRate) + "/hr");
+          setText("inv-out-line-total", currency.format(lineTotal));
+          setText("inv-out-total", currency.format(lineTotal));
+        }
+
+        function waitForLogo() {
+          return new Promise(function (resolve) {
+            if (!logo) {
+              resolve();
+              return;
+            }
+            if (logo.complete && logo.naturalWidth > 0) {
+              resolve();
+              return;
+            }
+            logo.addEventListener("load", function () {
+              resolve();
+            });
+            logo.addEventListener("error", function () {
+              resolve();
+            });
+          });
+        }
+
+        function resetSubmitButton() {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Generate invoice PDF";
+          }
+        }
+
+        function openInvoicePdf(eventName, eventDateRaw) {
+          document.body.classList.add("invoice-generating");
+          document.title = buildInvoiceDocumentTitle(eventName, eventDateRaw);
+
+          return waitForLogo().then(function () {
+            return new Promise(function (resolve) {
+              requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                  window.print();
+                  resolve();
+                });
+              });
+            });
+          });
+        }
+
+        function finishGenerating() {
+          document.body.classList.remove("invoice-generating");
+          document.title = defaultPageTitle;
+          resetSubmitButton();
+        }
+
+        window.addEventListener("afterprint", finishGenerating);
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Preparing PDF…";
+          }
+
+          var eventName = document.getElementById("inv-event-name").value.trim();
+          var eventDateRaw = document.getElementById("inv-event-date").value;
+
+          populateInvoice();
+          openInvoicePdf(eventName, eventDateRaw).catch(finishGenerating);
+
+          setTimeout(function () {
+            if (document.body.classList.contains("invoice-generating")) {
+              finishGenerating();
+            }
+          }, 5000);
+        });
+      })();
+    </script>
+  </body>
+</html>
