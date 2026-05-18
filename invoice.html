@@ -23,9 +23,6 @@
     <main class="page-content invoice-builder-main">
       <section id="invoice-form-section" class="content-card invoice-form-card">
         <h1>Invoice Generator</h1>
-        <p class="tell-us">
-          Fill in the event details below. Your invoice will open right away so you can save it as a PDF.
-        </p>
 
         <form id="invoice-builder-form" class="booking-form invoice-builder-form" novalidate>
           <label for="inv-client-name">Client name</label>
@@ -35,7 +32,6 @@
             type="text"
             required
             autocomplete="name"
-            placeholder="e.g. Jane Smith"
           />
 
           <label for="inv-event-date">Event date</label>
@@ -48,12 +44,11 @@
             type="text"
             required
             autocomplete="off"
-            placeholder="e.g. Sarah's Bat Mitzvah"
           />
 
           <div class="form-row form-row-split">
             <div class="form-field-group">
-              <label for="inv-hourly-rate">Hourly rate ($)</label>
+              <label for="inv-hourly-rate">Hourly rate</label>
               <input
                 id="inv-hourly-rate"
                 name="hourlyRate"
@@ -62,7 +57,6 @@
                 min="0"
                 step="0.01"
                 inputmode="decimal"
-                placeholder="e.g. 350"
               />
             </div>
             <div class="form-field-group">
@@ -75,7 +69,6 @@
                 min="0.25"
                 step="0.25"
                 inputmode="decimal"
-                placeholder="e.g. 4"
               />
             </div>
           </div>
